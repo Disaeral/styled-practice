@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
 const Global = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
     * {
         padding: 0;
         margin: 0;
@@ -9,7 +11,8 @@ const Global = createGlobalStyle`
     }
     body {
         overflow: hidden;
-        background-color: #5680e9;
+        background-color: #5ab9ea;
+        font-family: 'Poppins', sans-serif;
     }
     
     
@@ -18,19 +21,15 @@ const Global = createGlobalStyle`
 
 export const MyLink = styled(Link)`
   color: white;
-  background-color: #5ab9ea;
+  //background-color: #5ab9ea;
   height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: all .6s ease-out;
-  &:hover{
-      background-color: #84ceeb
-  }
+  cursor: pointer;
 `;
 export const MyListElement = styled.li`
-  width: 100%;
   text-align: center;
   position: relative;
 `;
@@ -38,5 +37,17 @@ export const MyList = styled.ul`
   display: flex;
   list-style: none;
 `;
+export const MyButton = styled(MyLink)`
+  background-color: #8860d0;
+  padding: 0 1rem;
+  margin: 0 .5rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  transition: all .2s ease-out;
+  &:hover{
+    border: 1px solid #ffffffcc;
+  }
+
+`
 
 export default Global;
