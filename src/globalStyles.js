@@ -20,7 +20,8 @@ const Global = createGlobalStyle`
 `;
 
 export const MyLink = styled(Link)`
-  color: white;
+  color:white;
+  transition: all .2s ease-out;
   //background-color: #5ab9ea;
   height: 4rem;
   display: flex;
@@ -44,6 +45,7 @@ export const MyButton = styled(MyLink)`
   border-radius: 5px;
   border: 1px solid transparent;
   transition: all .2s ease-out;
+  width:90%;
   &:hover{
     border: 1px solid #ffffffcc;
   }
