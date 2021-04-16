@@ -10,8 +10,8 @@ const Global = createGlobalStyle`
         box-sizing: border-box;
     }
     body {
-        overflow: hidden;
-        background-color: #5ab9ea;
+        overflow-x: hidden;
+        overflow-y: auto;
         font-family: 'Poppins', sans-serif;
     }
     
@@ -49,7 +49,14 @@ export const MyButton = styled(MyLink)`
   &:hover{
     border: 1px solid #ffffffcc;
   }
+`
 
+export const Slide = styled.div`
+  height: calc(100vh - 4rem);
+  background-color: green;
+  color: black;
+  z-index: 0;
+  display:flex;
 `
 
 export default Global;

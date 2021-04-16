@@ -9,11 +9,12 @@ const NavbarContainer = styled.nav`
   align-items: center;
   justify-content: space-between;
 
-  background-color: #5680e9cc;
+  background-color: #5680e9;
   z-index: 100;
   padding: 0 2rem;
   margin: 0 auto;
-  position: relative;
+  position: sticky;
+  top: 0;
 `;
 const NavbarLogo = styled(MyLink)`
   flex: 1;
@@ -35,7 +36,6 @@ const NavMenu = styled(MyList)`
     justify-content: flex-start;
     overflow-x: hidden;
     overflow-y: auto;
-
   }
 `;
 
@@ -54,7 +54,6 @@ const MenuLink = styled(MyLink)`
   padding: 0 1rem;
 
   @media screen and (max-width: 768px) {
-    
     justify-content: space-between;
   }
 `;
@@ -81,9 +80,9 @@ const SubMenuContainer = styled.div`
     opacity: 1;
     pointer-events: auto;
     width: 100%;
-    display:none;
+    display: none;
     ${MenuItem}:hover > & {
-      display:block;
+      display: block;
     }
   }
 `;
@@ -93,9 +92,7 @@ const SubMenu = styled(MyList)`
   display: block;
 `;
 
-const SubMenuLink = styled(MyLink)`
- 
-`;
+const SubMenuLink = styled(MyLink)``;
 
 const SubMenuItem = styled(MyListElement)`
   padding: 0 1rem;
@@ -103,19 +100,15 @@ const SubMenuItem = styled(MyListElement)`
   align-items: center;
   justify-content: space-between; //для иконки внутри внешнего элемента со вложенным списком
   transition: all 0.2s ease-out;
-  cursor:pointer;
-  &:hover, &:hover > ${SubMenuLink} {
+  cursor: pointer;
+  &:hover,
+  &:hover > ${SubMenuLink} {
     background-color: #fff;
     color: #000;
-    
   }
 `;
 
-const SeclvlSubMenu = styled(MyList)``;
 
-const SeclvlMenuItem = styled(MyListElement)``;
-
-const SeclvlMenuLink = styled(MyLink)``;
 
 const ButtonsContainer = styled.div`
   flex: 1;
@@ -133,20 +126,21 @@ const MenuContainer = styled.div`
   flex: 5;
   display: flex;
   @media screen and (max-width: 768px) {
-    display: flex;
+    //display: ${({ visible }) => (visible ? "flex" : "none")};
+    display:flex;
     justify-content: flex-start;
     flex-direction: column;
     position: absolute;
-    top: 100%;
+    top: ${({ visible }) => (visible ? "100%" : "-100vh")};;
     left: 0;
     width: 100%;
     background-color: #5680e9;
     height: calc(100vh - 4rem);
     padding: 1rem 0;
     transform: translate(0, 0);
-    opacity: ${({visible}) => (visible ? 1 : 0)};
+    opacity: 1;
     pointer-events: auto;
-    transition: all .2s ease;
+    transition: all 0.6s ease;
   }
 `;
 const Button = styled(MyButton)`
@@ -155,27 +149,30 @@ const Button = styled(MyButton)`
 const TransparentButton = styled(Button)`
   background: transparent;
 `;
-const MobileIcon = styled(FaBars)`
+const MobileIcon = styled.div`
   cursor: pointer;
   color: white;
   font-size: 24px;
+  display:none;
+  @media screen and (max-width: 768px) {
+    display: flex;
+  }
 `;
-const CloseMobile = styled(FaTimes)`
-  cursor: pointer;
-  color: white;
-  font-size: 24px;
-`
+
 const ArrowDown = styled(FaChevronDown)`
   cursor: pointer;
   color: white;
   font-size: 24px;
-  padding-left: .5rem;
-`
+  padding-left: 0.5rem;
+`;
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
 
-  const isMobile = window.innerWidth <= 768;
-  
+  const isMobile = window.innerWidth <= 768 ? false : true;
+
+  const handleClick = () => {
+    return setVisible(!visible)
+  }
   return (
     <NavbarContainer>
       <NavbarLogo>
@@ -183,7 +180,7 @@ const Navbar = () => {
         NavText
       </NavbarLogo>
       <MenuContainer visible={visible}>
-        <NavMenu >
+        <NavMenu>
           <MenuItem>
             <MenuLink>
               <span>Category 1</span>
@@ -219,7 +216,10 @@ const Navbar = () => {
           <Button>Регистрация</Button>
         </ButtonsContainer>
       </MenuContainer>
-      {isMobile ? visible?<CloseMobile  onClick={()=>setVisible(!visible)}/>: <MobileIcon onClick={()=>setVisible(!visible)} /> : null}
+      
+      <MobileIcon onClick={handleClick}>
+                    {visible ? <FaTimes /> : <FaBars />}
+                </MobileIcon>
     </NavbarContainer>
   );
 };
