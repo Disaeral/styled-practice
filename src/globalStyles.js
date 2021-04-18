@@ -15,13 +15,13 @@ const Global = createGlobalStyle`
         font-family: 'Poppins', sans-serif;
     }
     
-    
+
     
 `;
 
 export const MyLink = styled(Link)`
-  color:white;
-  transition: all .2s ease-out;
+  color: white;
+  transition: all 0.2s ease-out;
   //background-color: #5ab9ea;
   height: 4rem;
   display: flex;
@@ -41,22 +41,24 @@ export const MyList = styled.ul`
 export const MyButton = styled(MyLink)`
   background-color: #8860d0;
   padding: 0 1rem;
-  margin: 0 .5rem;
+  margin: 0 0.5rem;
   border-radius: 5px;
   border: 1px solid transparent;
-  transition: all .2s ease-out;
-  width:90%;
-  &:hover{
+  transition: all 0.2s ease-out;
+  width: 90%;
+  &:hover {
     border: 1px solid #ffffffcc;
   }
-`
+`;
 
 export const Slide = styled.div`
   height: calc(100vh - 4rem);
-  background-color: green;
-  color: black;
+  color: ${({ lightBg }) => (lightBg ? "#000" : "#fff")};
   z-index: 0;
-  display:flex;
-`
+  display: flex;
+  padding: 0 2rem;
+  background-color: ${({ lightBg }) => (lightBg ? "#fff" : "#000")};
+  //overflow-y:scroll;
+`;
 
 export default Global;

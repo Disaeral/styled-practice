@@ -68,7 +68,7 @@ const SubMenuContainer = styled.div`
   pointer-events: none;
   transition: all 0.1s ease-out;
   ${MenuItem}:hover > & {
-    transform: translate(0, 0);
+    
     opacity: 1;
     pointer-events: auto;
   }
@@ -101,10 +101,13 @@ const SubMenuItem = styled(MyListElement)`
   justify-content: space-between; //для иконки внутри внешнего элемента со вложенным списком
   transition: all 0.2s ease-out;
   cursor: pointer;
-  &:hover,
-  &:hover > ${SubMenuLink} {
+  &:hover
+   {
     background-color: #fff;
     color: #000;
+    & > ${SubMenuLink} {
+      color: #000;
+    }
   }
 `;
 
@@ -131,7 +134,7 @@ const MenuContainer = styled.div`
     justify-content: flex-start;
     flex-direction: column;
     position: absolute;
-    top: ${({ visible }) => (visible ? "100%" : "-100vh")};;
+    top: ${({ visible }) => (visible ? "100%" : "-100vh")};
     left: 0;
     width: 100%;
     background-color: #5680e9;
@@ -183,37 +186,37 @@ const Navbar = () => {
         <NavMenu>
           <MenuItem>
             <MenuLink>
-              <span>Category 1</span>
+              <span>Жанры</span>
               <ArrowDown />
             </MenuLink>
 
             <SubMenuContainer>
               <SubMenu>
                 <SubMenuItem>
-                  <SubMenuLink>Subcategory 1</SubMenuLink>
+                  <SubMenuLink>Rock</SubMenuLink>
                 </SubMenuItem>
                 <SubMenuItem>
-                  <SubMenuLink>Subcategory 2</SubMenuLink>
+                  <SubMenuLink>Electronica</SubMenuLink>
                 </SubMenuItem>
                 <SubMenuItem>
-                  <SubMenuLink>Subcategory 3</SubMenuLink>
+                  <SubMenuLink>Rap</SubMenuLink>
                 </SubMenuItem>
                 <SubMenuItem>
-                  <SubMenuLink>Subcategory 4</SubMenuLink>
+                  <SubMenuLink>Indie</SubMenuLink>
                 </SubMenuItem>
               </SubMenu>
             </SubMenuContainer>
           </MenuItem>
           <MenuItem>
-            <MenuLink>Category 2</MenuLink>
+            <MenuLink>Библиотека</MenuLink>
           </MenuItem>
           <MenuItem>
-            <MenuLink>Category 3</MenuLink>
+            <MenuLink>Плейлисты</MenuLink>
           </MenuItem>
         </NavMenu>
         <ButtonsContainer>
-          <TransparentButton>Логин</TransparentButton>
-          <Button>Регистрация</Button>
+          <TransparentButton to="/login">Логин</TransparentButton>
+          <Button to="/login">Регистрация</Button>
         </ButtonsContainer>
       </MenuContainer>
       

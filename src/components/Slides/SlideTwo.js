@@ -1,10 +1,11 @@
 import React from 'react';
+import { Slide } from '../../globalStyles';
 
 const SlideTwo = () => {
     return (
-        <div>
-            
-        </div>
+        <Slide>
+            <p style={{color:"fff"}}>hello</p>
+        </Slide>
     );
 };
 
