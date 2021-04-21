@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { MyListElement, MyLink, MyList, MyButton } from "../../globalStyles";
+import { MyListElement, MyLink, MyList, MyButton, MyHashLink } from "../../globalStyles";
 import { FaBars, FaChevronDown, FaTimes } from "react-icons/fa";
+
 
 const NavbarContainer = styled.nav`
   max-width: 100%;
@@ -16,7 +17,7 @@ const NavbarContainer = styled.nav`
   position: sticky;
   top: 0;
 `;
-const NavbarLogo = styled(MyLink)`
+const NavbarLogo = styled(MyHashLink)`
   flex: 1;
   display: flex;
   @media screen and (max-width: 768px) {
@@ -50,7 +51,7 @@ const MenuItem = styled(MyListElement)`
     width: 100%;
   }
 `;
-const MenuLink = styled(MyLink)`
+const MenuLink = styled(MyHashLink)`
   padding: 0 1rem;
 
   @media screen and (max-width: 768px) {
@@ -68,7 +69,6 @@ const SubMenuContainer = styled.div`
   pointer-events: none;
   transition: all 0.1s ease-out;
   ${MenuItem}:hover > & {
-    
     opacity: 1;
     pointer-events: auto;
   }
@@ -101,8 +101,7 @@ const SubMenuItem = styled(MyListElement)`
   justify-content: space-between; //для иконки внутри внешнего элемента со вложенным списком
   transition: all 0.2s ease-out;
   cursor: pointer;
-  &:hover
-   {
+  &:hover {
     background-color: #fff;
     color: #000;
     & > ${SubMenuLink} {
@@ -110,8 +109,6 @@ const SubMenuItem = styled(MyListElement)`
     }
   }
 `;
-
-
 
 const ButtonsContainer = styled.div`
   flex: 1;
@@ -130,7 +127,7 @@ const MenuContainer = styled.div`
   display: flex;
   @media screen and (max-width: 768px) {
     //display: ${({ visible }) => (visible ? "flex" : "none")};
-    display:flex;
+    display: flex;
     justify-content: flex-start;
     flex-direction: column;
     position: absolute;
@@ -156,7 +153,7 @@ const MobileIcon = styled.div`
   cursor: pointer;
   color: white;
   font-size: 24px;
-  display:none;
+  display: none;
   @media screen and (max-width: 768px) {
     display: flex;
   }
@@ -171,21 +168,21 @@ const ArrowDown = styled(FaChevronDown)`
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
 
-  const isMobile = window.innerWidth <= 768 ? false : true;
+  const isMobile = window.innerWidth <= 768 ? true : false;
 
   const handleClick = () => {
-    return setVisible(!visible)
-  }
+    return setVisible(!visible);
+  };
   return (
     <NavbarContainer>
-      <NavbarLogo>
+      <NavbarLogo smooth to={'/#main'} onClick={isMobile?()=>handleClick(false):null}>
         <NavIcon />
-        NavText
+        HWSound
       </NavbarLogo>
       <MenuContainer visible={visible}>
         <NavMenu>
           <MenuItem>
-            <MenuLink>
+            <MenuLink smooth to={"/#genres"} onClick={isMobile?()=>handleClick(false):null}>
               <span>Жанры</span>
               <ArrowDown />
             </MenuLink>
@@ -219,10 +216,10 @@ const Navbar = () => {
           <Button to="/login">Регистрация</Button>
         </ButtonsContainer>
       </MenuContainer>
-      
+
       <MobileIcon onClick={handleClick}>
-                    {visible ? <FaTimes /> : <FaBars />}
-                </MobileIcon>
+        {visible ? <FaTimes /> : <FaBars />}
+      </MobileIcon>
     </NavbarContainer>
   );
 };

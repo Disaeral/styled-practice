@@ -8,17 +8,18 @@ const AppFooter = styled.div`
     flex-wrap:wrap;
     display:flex;
     width: 100%;
-    justify-content:space-between;
+    justify-content:space-around;
     align-items: center;
     @media screen and (max-width: 769px) {
         flex-direction:column;
     }
+    
 `
 const FooterColumn = styled.div`
     display:flex;
     flex-direction: column;
     color: #000;
-    width: 24vw;
+    max-width: 14vw;
     
 `
 const FooterList = styled(MyList)`
@@ -41,32 +42,32 @@ const Footer = () => {
             <FooterColumn>
                 <FooterList>
                     <FooterElHeading>
-                        <FooterLink>link1 heading1</FooterLink>
+                        <FooterLink>Соцсети</FooterLink>
                     </FooterElHeading>
                     <FooterEl>
-                        <FooterLink>link2</FooterLink>
+                        <FooterLink>Youtube</FooterLink>
                     </FooterEl>
                     <FooterEl>
-                        <FooterLink>link3</FooterLink>
+                        <FooterLink>Instagram</FooterLink>
                     </FooterEl>
                     <FooterEl>
-                        <FooterLink>link4</FooterLink>
+                        <FooterLink>Twitter</FooterLink>
                     </FooterEl>
                 </FooterList>
             </FooterColumn>
             <FooterColumn>
                 <FooterList>
                     <FooterElHeading>
-                        <FooterLink>link5 heading2</FooterLink>
+                        <FooterLink>О нас</FooterLink>
                     </FooterElHeading>
                     <FooterEl>
-                        <FooterLink>link6</FooterLink>
+                        <FooterLink>Компания</FooterLink>
                     </FooterEl>
                     <FooterEl>
-                        <FooterLink>link7</FooterLink>
+                        <FooterLink>Вакансии</FooterLink>
                     </FooterEl>
                     <FooterEl>
-                        <FooterLink>link8</FooterLink>
+                        <FooterLink>Контакты</FooterLink>
                     </FooterEl>
                 </FooterList>
             </FooterColumn>
