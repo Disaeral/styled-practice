@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import {HashLink} from 'react-router-hash-link'
 
 const Global = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
@@ -20,7 +18,7 @@ const Global = createGlobalStyle`
     
 `;
 
-export const MyLink = styled(Link)`
+export const MyLink = styled.div`
   color: white;
   transition: all 0.2s ease-out;
   //background-color: #5ab9ea;
@@ -37,7 +35,7 @@ position: relative;
 top: -4rem;
 visibility: hidden;
 `
-export const MyHashLink = styled(HashLink)`
+export const MyHashLink = styled.div`
   color: white;
   transition: all 0.2s ease-out;
   //background-color: #5ab9ea;
@@ -68,14 +66,14 @@ export const MyButton = styled(MyLink)`
     border: 1px solid #ffffffcc;
   }
 `;
-
+// add theme control based on attribute "lightBg"
 export const Slide = styled.div`
   height: calc(100vh - 4rem);
-  color: ${({ lightBg }) => (lightBg ? "#000" : "#fff")};
+  color: #000;
   z-index: 0;
   display: flex;
   padding: 0 2rem;
-  background-color: ${({ lightBg }) => (lightBg ? "#fff" : "#000")};
+  background-color: #fff;
   //overflow-y:scroll;
 `;
 
