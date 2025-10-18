@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { MyListElement, MyLink, MyList, MyButton, MyHashLink } from "../../globalStyles";
 import { FaBars, FaChevronDown, FaTimes } from "react-icons/fa";
-
+import { Link } from 'react-router';
 
 const NavbarContainer = styled.nav`
   max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   background-color: #5680e9;
   z-index: 100;
   padding: 0 2rem;
@@ -122,11 +121,11 @@ const ButtonsContainer = styled.div`
     justify-content: space-between;
   }
 `;
-const MenuContainer = styled.div`
+const MenuContainer = styled.div<{ visible: boolean }>`
   flex: 5;
   display: flex;
   @media screen and (max-width: 768px) {
-    //display: ${({ visible }) => (visible ? "flex" : "none")};
+    display: ${({ visible }) => (visible ? "flex" : "none")};
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -171,18 +170,18 @@ const Navbar = () => {
   const isMobile = window.innerWidth <= 768 ? true : false;
 
   const handleClick = () => {
-    return setVisible(!visible);
+    if (isMobile) setVisible(!visible);
   };
   return (
     <NavbarContainer>
-      <NavbarLogo smooth to={'/#main'} onClick={isMobile?()=>handleClick(false):null}>
+      <NavbarLogo onClick={handleClick}>
         <NavIcon />
         HWSound
       </NavbarLogo>
       <MenuContainer visible={visible}>
         <NavMenu>
           <MenuItem>
-            <MenuLink smooth to={"/#genres"} onClick={isMobile?()=>handleClick(false):null}>
+            <MenuLink onClick={handleClick}>
               <span>Жанры</span>
               <ArrowDown />
             </MenuLink>
@@ -190,16 +189,16 @@ const Navbar = () => {
             <SubMenuContainer>
               <SubMenu>
                 <SubMenuItem>
-                  <SubMenuLink>Rock</SubMenuLink>
+                  <SubMenuLink to={"/genres"}>Rock</SubMenuLink>
                 </SubMenuItem>
                 <SubMenuItem>
-                  <SubMenuLink>Electronica</SubMenuLink>
+                  <SubMenuLink to={"/genres"}>Electronica</SubMenuLink>
                 </SubMenuItem>
                 <SubMenuItem>
-                  <SubMenuLink>Rap</SubMenuLink>
+                  <SubMenuLink to={"/genres"}>Rap</SubMenuLink>
                 </SubMenuItem>
                 <SubMenuItem>
-                  <SubMenuLink>Indie</SubMenuLink>
+                  <SubMenuLink to={"/genres"}>Indie</SubMenuLink>
                 </SubMenuItem>
               </SubMenu>
             </SubMenuContainer>
@@ -212,8 +211,8 @@ const Navbar = () => {
           </MenuItem>
         </NavMenu>
         <ButtonsContainer>
-          <TransparentButton to="/login">Логин</TransparentButton>
-          <Button to="/login">Регистрация</Button>
+          <TransparentButton to={"/login"}>Логин</TransparentButton>
+          <Button to={"/register"}>Регистрация</Button>
         </ButtonsContainer>
       </MenuContainer>
 

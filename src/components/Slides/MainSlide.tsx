@@ -1,6 +1,5 @@
-import React from 'react';
 import styled from 'styled-components'
-import bg from '../../assets/bg.jpg'
+import bg from '../../assets/bg.jpg';
 import { Anchor } from '../../globalStyles';
 
 const Background = styled.section`
@@ -33,19 +32,14 @@ const MainTitle = styled.div`
 
 
 const MainSlide = () => {
-    return (
-        <>
+    return <>
         <Anchor id="main"/> 
         <Background>
-            
             <MainTitle >
-               Hear Worlds Sound
-           </MainTitle >
-        
-           
+            Hear Worlds Sound
+        </MainTitle >
         </Background>
-        </>
-    );
+    </>
 };
 
 export default MainSlide;

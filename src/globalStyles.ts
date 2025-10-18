@@ -1,8 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { Link } from "react-router";
 
 const Global = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
     * {
         padding: 0;
         margin: 0;
@@ -12,16 +11,13 @@ const Global = createGlobalStyle`
         overflow-x: hidden;
         overflow-y: auto;
         font-family: 'Poppins', sans-serif;
-    }
-    
-
-    
+    }   
 `;
 
-export const MyLink = styled.div`
+export const MyLink = styled(Link)`
   color: white;
   transition: all 0.2s ease-out;
-  //background-color: #5ab9ea;
+  // background-color: #5ab9ea;
   height: 4rem;
   display: flex;
   align-items: center;
@@ -38,7 +34,7 @@ visibility: hidden;
 export const MyHashLink = styled.div`
   color: white;
   transition: all 0.2s ease-out;
-  //background-color: #5ab9ea;
+  // background-color: #5ab9ea;
   height: 4rem;
   display: flex;
   align-items: center;
@@ -66,7 +62,6 @@ export const MyButton = styled(MyLink)`
     border: 1px solid #ffffffcc;
   }
 `;
-// add theme control based on attribute "lightBg"
 export const Slide = styled.div`
   height: calc(100vh - 4rem);
   color: #000;
@@ -74,7 +69,7 @@ export const Slide = styled.div`
   display: flex;
   padding: 0 2rem;
   background-color: #fff;
-  //overflow-y:scroll;
+  overflow-y:scroll;
 `;
 
 export default Global;

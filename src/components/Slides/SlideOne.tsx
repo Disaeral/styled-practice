@@ -1,10 +1,9 @@
-import React from "react";
 import { Anchor, MyList, MyListElement, Slide } from "../../globalStyles";
 import styled from "styled-components";
 
 const SlideOneCont = styled(Slide)`
   display: flex;
-  
+  background-color: ${(props => props.theme.colors.secondary)};
   position: relative;
   @media screen and (max-width: 768px) {
     display: flex;
@@ -133,7 +132,7 @@ const SlideOne = () => {
   return (
     <>
     <Anchor  id="genres" />
-    <SlideOneCont lightBg >
+    <SlideOneCont >
       <ListContainer>
         <GenresList>
           <FlexRow>

@@ -1,16 +1,12 @@
-import Footer from "./components/Footer/Footer";
-import Navbar from "./components/Navbar/Navbar";
-import Main from "./pages/Main";
-import { Theme } from "./Theme";
+import { Route, Routes } from 'react-router';
+import { Main } from './pages/Main';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 
-function App() {
-  return (
-    <Theme>
-      <Navbar />
-      <Main />
-      <Footer />
-    </Theme>
-  );
+export const App = () => {
+  return <Routes>
+    <Route path='/' element={<Main />} />
+    <Route path='/login' element={<Login />} />
+    <Route path='/register' element={<Register />} />
+  </Routes>
 }
-
-export default App;

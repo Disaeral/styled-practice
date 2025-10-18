@@ -3,16 +3,18 @@ import MainSlide from '../components/Slides/MainSlide';
 import SlideOne from '../components/Slides/SlideOne';
 import SlideThree from '../components/Slides/SlideThree';
 import SlideTwo from '../components/Slides/SlideTwo';
+import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
 
 
-const Main = () => {
+export const Main = () => {
     return (<>
-        <MainSlide />
-        <SlideOne />
-        <SlideTwo />
-        <SlideThree/>
+        <Navbar />
+            <MainSlide />
+            <SlideOne />
+            <SlideTwo />
+            <SlideThree/>
+        <Footer/>
         </> 
     );
 };
-
-export default Main;
