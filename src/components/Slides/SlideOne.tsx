@@ -1,159 +1,63 @@
-import { Anchor, MyList, MyListElement, Slide } from "../../globalStyles";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const SlideOneCont = styled(Slide)`
+const SectionContainer = styled.section`
   display: flex;
-  background-color: ${(props => props.theme.colors.secondary)};
-  position: relative;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-const ImageContainer = styled.div`
-flex:1;
-    background-color: yellow;
-    @media screen and (max-width: 768px) {
-    display:none;
-  }
-
+  height: 100vh;
+  width: 100%;
+  background-color: #444;
 `
-const ListContainer = styled.div`
-flex:1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 1rem;
-  width: 100%;
-  @media screen and (max-width: 768px) {
-    padding-top: 8rem;
+const orbit = keyframes`
+  to {
+    transform: rotate(360deg);
   }
-  @media screen and (max-width: 566px) {
-    overflow-y:scroll;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    
-  };
-`;
+`
 
-const GenresList = styled(MyList)`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-`;
+const GenresContainer = styled.div`
+  position: relative;
+  flex: 1;
+  animation: ${orbit} 15s linear infinite;
+ `
 
-const GenreElem = styled(MyListElement)`
+const genres = [1,2,3,8, "cHO", "NOK", "tabasko", 6]
+
+const GenreItem = styled.div<{index: number}>`
   border: 1px solid black;
-  cursor: pointer;
-  margin: 0 0.2rem;
-  width: 28vh;
-  height: 28vh;
-  transition: all 0.2s ease-out;
-  &:hover {
-    transform: scale(1.05);
-  }
+  box-sizing: border-box;
+  width: 10vw;
+  height: 10vw;
+  position: absolute;
+  top: ${({index}) => `calc(${Math.sin((index/(genres.length))*2*Math.PI)}* 20vw + 50% - 5vw)`}; 
+  left: ${({index}) => `calc(${Math.cos((index/(genres.length))*2*Math.PI)}* 20vw + 50% - 5vw)`};
+  background-color: ${({index}) => `color-mix(in srgb, green ${10 * index}%, blue ${90 / index}%)`};
+  animation: ${orbit} 15s linear infinite;
+  animation-direction: reverse;
+`
 
-  @media screen and (max-width: 768px) {
-    
-    height: 20vh;
-    width: 44vh;
-  }
-  @media screen and (max-width: 566px) {
-    &:hover {
-    transform: none;
-  }
-    margin-top: 0.25rem;
-  };
-`;
-const FlexRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  @media screen and (max-width: 768px) {
-    max-width: 80%;
-    
-  };
-  @media screen and (max-width: 566px) {
-    flex-direction:column;
-    width:100%;
-    padding: 0;
-    padding-top: 0.25rem;
-  };
-  &:nth-child(2) {
-    justify-content: space-between;
-    align-self: flex-end;
-    max-width: 100%;
-    
-    @media screen and (max-width: 960px) {
-      max-width: 82%;
-      align-items: center;
-      justify-content: center;
-    }
-    @media screen and (max-width: 768px) {
-      max-width: 80%;
-      align-items: center;
-      justify-content: center;
-      
-    
-    }
-  }
-  padding: 0.25rem 0;
-`;
+const CenterPoint = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: red;
+  width: 5px;
+  height: 5px;
+`
 
-const MainTitle = styled(GenreElem)`
-  flex: 2;
-  &:hover {
-    transform: initial;
-    background-color: black;
-    color: white;
-    transition: all 0.4s ease;
-  }
-  border: none;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media screen and (max-width: 768px) {
-    display: block;
-    width: 100%;
-    position: absolute;
-    top:-0.25rem;
-    background-color: black;
-    color: white;
-  }
-`;
+const ImageContainer = styled.div`
+  flex: 1;
+`
 
-const SlideOne = () => {
+const SlideOne: React.FC = () => {
   return (
     <>
-    <Anchor  id="genres" />
-    <SlideOneCont >
-      <ListContainer>
-        <GenresList>
-          <FlexRow>
-            <GenreElem>1</GenreElem>
-            <GenreElem>2</GenreElem>
-          </FlexRow>
-          <FlexRow>
-            <GenreElem>3</GenreElem>
-            <MainTitle>Listen what is interesting for you</MainTitle>
-            <GenreElem>4</GenreElem>
-          </FlexRow>
-          <FlexRow>
-            <GenreElem>5</GenreElem>
-            <GenreElem>6</GenreElem>
-          </FlexRow>
-        </GenresList>
-      </ListContainer>
-      <ImageContainer>
-          asd
-      </ImageContainer>
-    </SlideOneCont>
+      <SectionContainer>
+        <GenresContainer>
+          <CenterPoint />
+          {genres.map((genre, i) => <GenreItem index={i+1}>{genre}</GenreItem>)}
+        </GenresContainer>
+        <ImageContainer>Imagine? LOL!</ImageContainer>
+      </SectionContainer>
     </>
   );
 };

@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import { MyListElement, MyLink, MyList, MyButton, MyHashLink } from "../../globalStyles";
 import { FaBars, FaChevronDown, FaTimes } from "react-icons/fa";
-import { Link } from 'react-router';
 
 const NavbarContainer = styled.nav`
   max-width: 100%;
