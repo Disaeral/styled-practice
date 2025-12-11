@@ -3,13 +3,13 @@ import bg from '../../assets/bg.jpg';
 import { Anchor } from '../../globalStyles';
 
 const Background = styled.section`
-    height: calc(100vh - 4rem);
+    height: calc(100vh - 50px);
     width:100%;
     background:url(${bg}) no-repeat top center / cover;
     z-index: -1;
     &::before {
         content:"";
-        height: calc(100vh - 4rem);
+        height: calc(100vh - 50px);
     width:100%;
     background-color: #000;
     opacity: .6;
@@ -29,7 +29,6 @@ const MainTitle = styled.div`
     position: absolute;
     top: 50vh;
 `
-
 
 const MainSlide = () => {
     return <>

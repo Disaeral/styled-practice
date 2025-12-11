@@ -11,7 +11,11 @@ const Global = createGlobalStyle`
         overflow-x: hidden;
         overflow-y: auto;
         font-family: 'Poppins', sans-serif;
-    }   
+    }
+    :root {
+      --header-height: ${({theme}) => theme.heights.header};
+      --footer-height: ${({theme}) => theme.heights.footer};
+    }
 `;
 
 export const MyLink = styled(Link)`
@@ -63,7 +67,7 @@ export const MyButton = styled(MyLink)`
   }
 `;
 export const Slide = styled.div`
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 50px);
   color: #000;
   z-index: 0;
   display: flex;

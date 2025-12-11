@@ -1,5 +1,7 @@
-import { MouseEvent as ReactMouseEvent } from 'react';
+import { MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
 import styled, { keyframes } from "styled-components";
+import { Skeleton } from '../Skeletons/Skeleton';
+import { Typography } from '../Typography/Typography';
 
 const SectionContainer = styled.section`
     display: flex;
@@ -56,7 +58,7 @@ const InnerGenreItem = styled.div<{ index: number }>`
     align-items: center;
     justify-content: center;
     background-color: ${({ index }) =>
-        `color-mix(in srgb, green ${10 * index}%, blue ${90 / index}%)`};
+        `color-mix(in srgb, #006cf933 ${Math.min(15 * index, 100)}%, #0000ff33 ${Math.min(15 * index, 100)}%)`};
     ${GenreItem}:hover & {
         transform: perspective(1000px) 
             rotateX(var(--rotateX, 0deg))
@@ -88,8 +90,12 @@ const CenterPoint = styled.div`
     height: 5px;
 `;
 
-const ImageContainer = styled.div`
+const DescriptionContainer = styled.div`
     flex: 1;
+    padding: 1rem;
+    font-family: Roboto, sans-serif;
+    font-size: 1.5rem;
+    color: #cccccc;
 `;
 
 const SlideOne: React.FC = () => {
@@ -105,6 +111,14 @@ const SlideOne: React.FC = () => {
         e.currentTarget.style.setProperty("--rotateY", `${rotateY}deg`);
     };
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), 3500);
+    }, [])
+    
+
     return (
         <SectionContainer>
             <GenresContainer>
@@ -115,7 +129,7 @@ const SlideOne: React.FC = () => {
                     </GenreItem>
                 ))}
             </GenresContainer>
-            <ImageContainer>Imagine? LOL!</ImageContainer>
+            <DescriptionContainer>{isLoading ? <Skeleton type="TEXT" /> : <Typography>{"Imagine? LOL!"}</Typography>}</DescriptionContainer>
         </SectionContainer>
     );
 };

@@ -1,223 +1,113 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
-import { MyListElement, MyLink, MyList, MyButton, MyHashLink } from "../../globalStyles";
-import { FaBars, FaChevronDown, FaTimes } from "react-icons/fa";
+import { FaCentercode } from "react-icons/fa6";
+import { AiOutlineTranslation } from "react-icons/ai";
+import { Dropdown } from './Dropdown';
+import { Typography } from '../Typography/Typography';
+import { ELanguage, TLanguage } from '../../types/const';
+import { LanguageContext } from '../../providers/LanguageProvider';
+import { useTranslation } from 'react-i18next';
 
-const NavbarContainer = styled.nav`
-  max-width: 100%;
+const NavbarContainer = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background-color: #5680e9;
-  z-index: 100;
-  padding: 0 2rem;
-  margin: 0 auto;
-  position: sticky;
-  top: 0;
-`;
-const NavbarLogo = styled(MyHashLink)`
-  flex: 1;
-  display: flex;
-  @media screen and (max-width: 768px) {
-    align-self: flex-start;
-    flex: none;
-  }
-`;
-
-const NavIcon = styled.div``;
-const NavMenu = styled(MyList)`
-  flex: 5;
-  justify-content: flex-end;
   align-items: center;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-`;
+  height: 50px;
+  background-color: #0022ff55;
+  padding: 0 4rem;
+`
+const MainMenuContainer = styled.div`
+  display: flex;
+  align-items:center;
+  height: ${({theme}) => theme.heights.header};
+`
+const LogoIconContainer = styled.div`
+  display: flex;
+  height: 100%;
+  align-items:center;
+`
+const LogoIcon = styled(FaCentercode)`
+  color: white;
+  font-size: 2rem;
+`
+const MenuItem = styled.div`
+  padding: .5rem;
+  height: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+`
 
-const MenuItem = styled(MyListElement)`
-  transition: all 0.6s ease-out;
-  &:hover {
-    background-color: #84ceeb;
-  }
-
+const DropdownMenuItem = styled(MenuItem)`
   position: relative;
-  @media screen and (max-width: 768px) {
-    width: 100%;
+  cursor: pointer;
+`
+const NavbarGenreDropdown = styled(Dropdown)`
+  background-color: gray;
+  max-height: 0px;
+  overflow: hidden;
+  transition: all .15s ease-in-out;
+  ${DropdownMenuItem}:hover & {
+    max-height: 200px;
   }
-`;
-const MenuLink = styled(MyHashLink)`
-  padding: 0 1rem;
+`
 
-  @media screen and (max-width: 768px) {
-    justify-content: space-between;
-  }
-`;
-const SubMenuContainer = styled.div`
+const TranslationIcon = styled(AiOutlineTranslation)`
+  color: white;
+  font-size: 1.5rem;  
+`
+const TranslationMenu = styled.div<{shown: boolean}>`
   position: absolute;
+  transition: all .15s ease-in-out;
+  max-height: ${({shown}) => shown ? "100px" : "0px"};
+  min-width: 100%;
+  left: 50%;
   top: 100%;
-  left: 0;
-  width: 10rem;
-  display: block;
-  background-color: black;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.1s ease-out;
-  ${MenuItem}:hover > & {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  @media screen and (max-width: 768px) {
-    position: initial;
-    top: initial;
-    left: initial;
-    transform: initial;
-    opacity: 1;
-    pointer-events: auto;
-    width: 100%;
-    display: none;
-    ${MenuItem}:hover > & {
-      display: block;
-    }
-  }
-`;
-const SubMenu = styled(MyList)`
-  //display:block;//приходится заново прописывать дисплей тк наследуется стиль MyList а не SubMenuContainer
+  transform: translate(-50%, 0); 
+  overflow: hidden;
+  white-space: nowrap;
+`
+
+const TranslationMenuItem = styled(MenuItem)`
   position: relative;
-  display: block;
-`;
-
-const SubMenuLink = styled(MyLink)``;
-
-const SubMenuItem = styled(MyListElement)`
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; //для иконки внутри внешнего элемента со вложенным списком
-  transition: all 0.2s ease-out;
+  height: 100%;
+`
+const TranslationOption = styled.div<{activeLanguage: boolean}>`
   cursor: pointer;
-  &:hover {
-    background-color: #fff;
-    color: #000;
-    & > ${SubMenuLink} {
-      color: #000;
-    }
-  }
-`;
+  background-color: ${({activeLanguage}) => activeLanguage ? "white" : "grey" };
+`
 
-const ButtonsContainer = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 0;
-    justify-content: space-between;
-  }
-`;
-const MenuContainer = styled.div<{ visible: boolean }>`
-  flex: 5;
-  display: flex;
-  @media screen and (max-width: 768px) {
-    display: ${({ visible }) => (visible ? "flex" : "none")};
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    position: absolute;
-    top: ${({ visible }) => (visible ? "100%" : "-100vh")};
-    left: 0;
-    width: 100%;
-    background-color: #5680e9;
-    height: calc(100vh - 4rem);
-    padding: 1rem 0;
-    transform: translate(0, 0);
-    opacity: 1;
-    pointer-events: auto;
-    transition: all 0.6s ease;
-  }
-`;
-const Button = styled(MyButton)`
-  height: 3rem;
-`;
-const TransparentButton = styled(Button)`
-  background: transparent;
-`;
-const MobileIcon = styled.div`
-  cursor: pointer;
-  color: white;
-  font-size: 24px;
-  display: none;
-  @media screen and (max-width: 768px) {
-    display: flex;
-  }
-`;
-
-const ArrowDown = styled(FaChevronDown)`
-  cursor: pointer;
-  color: white;
-  font-size: 24px;
-  padding-left: 0.5rem;
-`;
 const Navbar = () => {
-  const [visible, setVisible] = useState(false);
-
-  const isMobile = window.innerWidth <= 768 ? true : false;
-
-  const handleClick = () => {
-    if (isMobile) setVisible(!visible);
-  };
+  const [isTranslationMenuShown, setIsTranslationMenuShown] = useState(false);
+  const {i18n} = useTranslation();
+  const {lang, setLang} = useContext(LanguageContext);
+  const changeLanguage = (lang: TLanguage) => {
+    i18n.changeLanguage(lang);
+    setLang(lang);
+    setIsTranslationMenuShown(false);
+  }
   return (
     <NavbarContainer>
-      <NavbarLogo onClick={handleClick}>
-        <NavIcon />
-        HWSound
-      </NavbarLogo>
-      <MenuContainer visible={visible}>
-        <NavMenu>
-          <MenuItem>
-            <MenuLink onClick={handleClick}>
-              <span>Жанры</span>
-              <ArrowDown />
-            </MenuLink>
-
-            <SubMenuContainer>
-              <SubMenu>
-                <SubMenuItem>
-                  <SubMenuLink to={"/genres"}>Rock</SubMenuLink>
-                </SubMenuItem>
-                <SubMenuItem>
-                  <SubMenuLink to={"/genres"}>Electronica</SubMenuLink>
-                </SubMenuItem>
-                <SubMenuItem>
-                  <SubMenuLink to={"/genres"}>Rap</SubMenuLink>
-                </SubMenuItem>
-                <SubMenuItem>
-                  <SubMenuLink to={"/genres"}>Indie</SubMenuLink>
-                </SubMenuItem>
-              </SubMenu>
-            </SubMenuContainer>
-          </MenuItem>
-          <MenuItem>
-            <MenuLink>Библиотека</MenuLink>
-          </MenuItem>
-          <MenuItem>
-            <MenuLink>Плейлисты</MenuLink>
-          </MenuItem>
-        </NavMenu>
-        <ButtonsContainer>
-          <TransparentButton to={"/login"}>Логин</TransparentButton>
-          <Button to={"/register"}>Регистрация</Button>
-        </ButtonsContainer>
-      </MenuContainer>
-
-      <MobileIcon onClick={handleClick}>
-        {visible ? <FaTimes /> : <FaBars />}
-      </MobileIcon>
+      <LogoIconContainer>
+        <LogoIcon />
+      </LogoIconContainer>
+      <MainMenuContainer>
+          <TranslationMenuItem>
+              <TranslationIcon onClick={() => setIsTranslationMenuShown(prev => !prev)} onBlur={() => setIsTranslationMenuShown(false)}/>
+              <TranslationMenu shown={isTranslationMenuShown}>
+                {Object.entries(ELanguage).map(
+                  ([displayed, value]) =>
+                    <TranslationOption activeLanguage={value === lang} onClick={() => changeLanguage(value)}>{displayed}</TranslationOption>
+                )}
+              </TranslationMenu>
+          </TranslationMenuItem>
+          <DropdownMenuItem>
+            <Typography>Genres</Typography>
+            <NavbarGenreDropdown items={["JRock","Progressive House","Hardstyle"]}></NavbarGenreDropdown>
+          </DropdownMenuItem>
+          <MenuItem>About</MenuItem>
+          <MenuItem>Login</MenuItem>
+      </MainMenuContainer>
     </NavbarContainer>
   );
 };

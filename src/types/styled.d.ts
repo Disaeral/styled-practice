@@ -7,5 +7,10 @@ declare module 'styled-components' {
       main: string;
       secondary: string;
     };
+    heights: {
+      header: string;
+      footer: string;
+      content: string;
+    }
   }
 }

@@ -26,7 +26,13 @@ const theme: DefaultTheme = {
   borderRadius: "5px",
   colors: {
     main: palette.navyBlue,
-    secondary: palette.darkCornflowerBlue
+    secondary: palette.darkCornflowerBlue,
+    ...palette
+  },
+  heights: {
+    header: "50px",
+    footer: "50px",
+    content: "calc(100vh - var(--header-height) - var(--footer-height))"
   }
 }
 
