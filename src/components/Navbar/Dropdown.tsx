@@ -20,7 +20,7 @@ type DropdownProps = {
 
 export const Dropdown: React.FC<DropdownProps> = ({items, className}: DropdownProps) => {
     return <DropdownContainer className={className}>
-        {items.map((item) => <DropdownElement>
+        {items.map((item, i) => <DropdownElement key={i+1}>
             {item}
         </DropdownElement>)}
     </DropdownContainer>

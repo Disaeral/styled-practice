@@ -37,17 +37,18 @@ const MenuItem = styled.div`
   align-items:center;
   justify-content:center;
 `
-
-const DropdownMenuItem = styled(MenuItem)`
-  position: relative;
-  cursor: pointer;
-`
 const NavbarGenreDropdown = styled(Dropdown)`
   background-color: gray;
   max-height: 0px;
   overflow: hidden;
   transition: all .15s ease-in-out;
-  ${DropdownMenuItem}:hover & {
+  z-index: 1;
+`
+
+const DropdownMenuItem = styled(MenuItem)`
+  position: relative;
+  cursor: pointer;
+  &:hover > ${NavbarGenreDropdown} {
     max-height: 200px;
   }
 `
@@ -56,10 +57,10 @@ const TranslationIcon = styled(AiOutlineTranslation)`
   color: white;
   font-size: 1.5rem;  
 `
-const TranslationMenu = styled.div<{shown: boolean}>`
+const TranslationMenu = styled.div<{$shown: boolean}>`
   position: absolute;
   transition: all .15s ease-in-out;
-  max-height: ${({shown}) => shown ? "100px" : "0px"};
+  max-height: ${({$shown}) => $shown ? "100px" : "0px"};
   min-width: 100%;
   left: 50%;
   top: 100%;
@@ -72,9 +73,9 @@ const TranslationMenuItem = styled(MenuItem)`
   position: relative;
   height: 100%;
 `
-const TranslationOption = styled.div<{activeLanguage: boolean}>`
+const TranslationOption = styled.div<{$activeLanguage: boolean}>`
   cursor: pointer;
-  background-color: ${({activeLanguage}) => activeLanguage ? "white" : "grey" };
+  background-color: ${({$activeLanguage}) => $activeLanguage ? "white" : "grey" };
 `
 
 const Navbar = () => {
@@ -94,10 +95,16 @@ const Navbar = () => {
       <MainMenuContainer>
           <TranslationMenuItem>
               <TranslationIcon onClick={() => setIsTranslationMenuShown(prev => !prev)} onBlur={() => setIsTranslationMenuShown(false)}/>
-              <TranslationMenu shown={isTranslationMenuShown}>
+              <TranslationMenu $shown={isTranslationMenuShown}>
                 {Object.entries(ELanguage).map(
-                  ([displayed, value]) =>
-                    <TranslationOption activeLanguage={value === lang} onClick={() => changeLanguage(value)}>{displayed}</TranslationOption>
+                  ([displayed, value], i) =>
+                    <TranslationOption
+                      $activeLanguage={value === lang}
+                      onClick={() => changeLanguage(value)}
+                      key={i+1}
+                    >
+                      {displayed}
+                    </TranslationOption>
                 )}
               </TranslationMenu>
           </TranslationMenuItem>
