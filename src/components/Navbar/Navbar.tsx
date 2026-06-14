@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaCentercode } from "react-icons/fa6";
 import { AiOutlineTranslation } from "react-icons/ai";
 import { Dropdown } from './Dropdown';
-import { Typography } from '../Typography/Typography';
+import { NavbarLink } from '../Links/NavbarLink';
 import { ELanguage, TLanguage } from '../../types/const';
 import { LanguageContext } from '../../providers/LanguageProvider';
 import { useTranslation } from 'react-i18next';
@@ -90,7 +90,9 @@ const Navbar = () => {
   return (
     <NavbarContainer>
       <LogoIconContainer>
-        <LogoIcon />
+        <NavbarLink to='/'>
+          <LogoIcon />
+        </NavbarLink>
       </LogoIconContainer>
       <MainMenuContainer>
           <TranslationMenuItem>
@@ -109,11 +111,15 @@ const Navbar = () => {
               </TranslationMenu>
           </TranslationMenuItem>
           <DropdownMenuItem>
-            <Typography>Genres</Typography>
+            <NavbarLink to='/genres'>Genres</NavbarLink>
             <NavbarGenreDropdown items={["JRock","Progressive House","Hardstyle"]}></NavbarGenreDropdown>
           </DropdownMenuItem>
-          <MenuItem>About</MenuItem>
-          <MenuItem>Login</MenuItem>
+          <MenuItem>
+            <NavbarLink to='/about'>About</NavbarLink>
+          </MenuItem>
+          <MenuItem>
+            <NavbarLink to='/login'>Login</NavbarLink>
+          </MenuItem>
       </MainMenuContainer>
     </NavbarContainer>
   );

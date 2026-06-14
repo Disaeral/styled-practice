@@ -3,10 +3,11 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     borderRadius: string;
-    colors: {
-      main: string;
-      secondary: string;
-    };
+    palette: Record<string, string|number>;
+    typography?: {
+      fonts: string[],
+      fontSizes: Record<string, string>
+    }
     heights: {
       header: string;
       footer: string;

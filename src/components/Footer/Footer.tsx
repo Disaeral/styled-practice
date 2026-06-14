@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { MyLink, MyList, MyListElement } from '../../globalStyles';
 
 const AppFooter = styled.div`
-    background-color: ${props => props.theme.colors.main};
+    background-color: ${({theme}) => theme.palette.main};
     padding-bottom: 5rem;
     flex-wrap:wrap;
     display:flex;

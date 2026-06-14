@@ -3,6 +3,8 @@ import { ThemeProvider, DefaultTheme } from 'styled-components';
 
 const palette = {
     navyBlue: "#03045eff",
+    main: "#03045eff",
+    secondary: "#48cae4ff",
     darkCornflowerBlue: "#023e8aff",
     starCommandBlue: "#0077b6ff",
     blueGreen: "#0096c7ff",
@@ -24,11 +26,8 @@ const typography = {
 
 const theme: DefaultTheme = {
   borderRadius: "5px",
-  colors: {
-    main: palette.navyBlue,
-    secondary: palette.darkCornflowerBlue,
-    ...palette
-  },
+  palette,
+  typography,
   heights: {
     header: "50px",
     footer: "50px",

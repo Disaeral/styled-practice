@@ -10,13 +10,13 @@ export const FilledButton = styled.button`
     font-weight: 750;
     text-transform:uppercase;
     cursor: pointer;
-    background-color: ${({theme}) => theme.colors.main};
+    background-color: ${({theme}) => theme.palette.main};
     transition: all .15s ease-in-out;
     &:focus-visible {
         outline: none
     }
     &:hover {
-        background-color: ${({theme}) => theme.colors.secondary};
+        background-color: ${({theme}) => theme.palette.secondary};
         color: #f3f3f3;
     }
 `
