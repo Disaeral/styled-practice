@@ -1,10 +1,7 @@
-import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import {HashLink} from 'react-router-hash-link'
+import { Link } from "react-router";
 
 const Global = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
     * {
         padding: 0;
         margin: 0;
@@ -15,15 +12,16 @@ const Global = createGlobalStyle`
         overflow-y: auto;
         font-family: 'Poppins', sans-serif;
     }
-    
-
-    
+    :root {
+      --header-height: ${({theme}) => theme.heights.header};
+      --footer-height: ${({theme}) => theme.heights.footer};
+    }
 `;
 
 export const MyLink = styled(Link)`
   color: white;
   transition: all 0.2s ease-out;
-  //background-color: #5ab9ea;
+  // background-color: #5ab9ea;
   height: 4rem;
   display: flex;
   align-items: center;
@@ -37,10 +35,10 @@ position: relative;
 top: -4rem;
 visibility: hidden;
 `
-export const MyHashLink = styled(HashLink)`
+export const MyHashLink = styled.div`
   color: white;
   transition: all 0.2s ease-out;
-  //background-color: #5ab9ea;
+  // background-color: #5ab9ea;
   height: 4rem;
   display: flex;
   align-items: center;
@@ -68,15 +66,14 @@ export const MyButton = styled(MyLink)`
     border: 1px solid #ffffffcc;
   }
 `;
-
 export const Slide = styled.div`
-  height: calc(100vh - 4rem);
-  color: ${({ lightBg }) => (lightBg ? "#000" : "#fff")};
+  height: calc(100vh - 50px);
+  color: #000;
   z-index: 0;
   display: flex;
   padding: 0 2rem;
-  background-color: ${({ lightBg }) => (lightBg ? "#fff" : "#000")};
-  //overflow-y:scroll;
+  background-color: #fff;
+  overflow-y:scroll;
 `;
 
 export default Global;

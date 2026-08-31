@@ -1,9 +1,8 @@
-import React from 'react';
 import styled from 'styled-components'
 import { MyLink, MyList, MyListElement } from '../../globalStyles';
 
 const AppFooter = styled.div`
-    background-color: ${props => props.theme.colors.navyBlue};
+    background-color: ${({theme}) => theme.palette.main};
     padding-bottom: 5rem;
     flex-wrap:wrap;
     display:flex;
@@ -42,36 +41,36 @@ const Footer = () => {
             <FooterColumn>
                 <FooterList>
                     <FooterElHeading>
-                        <FooterLink>Соцсети</FooterLink>
+                        <FooterLink to={"/socials"}>Соцсети</FooterLink>
                     </FooterElHeading>
                     <FooterEl>
-                        <FooterLink>Youtube</FooterLink>
+                        <FooterLink to={"/yt?"}>Youtube</FooterLink>
                     </FooterEl>
                     <FooterEl>
-                        <FooterLink>Instagram</FooterLink>
+                        <FooterLink to={"/insta"}>Instagram</FooterLink>
                     </FooterEl>
                     <FooterEl>
-                        <FooterLink>Twitter</FooterLink>
+                        <FooterLink to={"/x"}>X</FooterLink>
                     </FooterEl>
                 </FooterList>
             </FooterColumn>
             <FooterColumn>
                 <FooterList>
                     <FooterElHeading>
-                        <FooterLink>О нас</FooterLink>
+                        <FooterLink to={"/about"}>О нас</FooterLink>
                     </FooterElHeading>
                     <FooterEl>
-                        <FooterLink>Компания</FooterLink>
+                        <FooterLink to={"/corporate"}>Компания</FooterLink>
                     </FooterEl>
                     <FooterEl>
-                        <FooterLink>Вакансии</FooterLink>
+                        <FooterLink to={"/jobs"}>Вакансии</FooterLink>
                     </FooterEl>
                     <FooterEl>
-                        <FooterLink>Контакты</FooterLink>
+                        <FooterLink to={"/contact-us"}>Контакты</FooterLink>
                     </FooterEl>
                 </FooterList>
             </FooterColumn>
-            <FooterColumn>
+            {/* <FooterColumn>
                 <FooterList>
                     <FooterElHeading>
                         <FooterLink>link9 heading3</FooterLink>
@@ -102,7 +101,7 @@ const Footer = () => {
                         <FooterLink>link16</FooterLink>
                     </FooterEl>
                 </FooterList>
-            </FooterColumn>
+            </FooterColumn> */}
         </AppFooter>
     );
 };
